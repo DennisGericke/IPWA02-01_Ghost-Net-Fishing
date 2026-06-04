@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Geisternetz melden</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 40px; }
+        .container { max-width: 500px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 0 auto; }
+        h2 { color: #005f73; margin-top: 0; border-bottom: 2px solid #0a9396; padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #495057; }
+        input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
+        input[type="number"]:focus { border-color: #0a9396; outline: none; box-shadow: 0 0 5px rgba(10, 147, 150, 0.3); }
+        button { width: 100%; background-color: #0a9396; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        button:hover { background-color: #005f73; }
+        .alert { background-color: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Geisternetz anonym melden</h2>
+    
+    <div th:if="${param.erfolg}" class="alert">
+        Das Geisternetz wurde erfolgreich und anonym im System registriert!
+    </div>
+
+    <form th:action="@{/melden}" th:object="${neuesNetz}" method="post">
+        <div class="form-group">
+            <label for="latitude">Breitengrad (Latitude):</label>
+            <input type="number" step="0.000001" id="latitude" th:field="*{latitude}" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="longitude">Längengrad (Longitude):</label>
+            <input type="number" step="0.000001" id="longitude" th:field="*{longitude}" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="groesse">Geschätzte Größe (Meter):</label>
+            <input type="number" step="0.1" id="groesse" th:field="*{groesse}" required />
+        </div>
+        
+        <button type="submit">Meldung absenden</button>
+    </form>
+</div>
+
+</body>
+</html>
