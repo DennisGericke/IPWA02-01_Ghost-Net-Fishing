@@ -38,8 +38,23 @@
                             <td th:text="${netz.longitude}">10.5678</td>
                             <td th:text="${netz.groesse}">25</td>
                             <td>
-                                <span class="badge bg-info text-dark" th:text="${netz.status}">GEMELDET</span>
-                            </td>
+    <span class="badge bg-info text-dark" th:text="${netz.status}">GEMELDET</span>
+    
+    <div class="mt-2">
+        <form th:if="${netz.status.name() == 'GEMELDET'}" 
+              th:action="@{/netze/{id}/bergen(id=${netz.id})}" method="post" class="row g-2 align-items-center">
+            <div class="col-auto">
+                <input type="text" name="name" class="form-control form-control-sm" placeholder="Dein Name" required />
+            </div>
+            <div class="col-auto">
+                <input type="text" name="telefonnummer" class="form-control form-control-sm" placeholder="Telefonnummer" required />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Für Bergung eintragen</button>
+            </div>
+        </form>
+    </div>
+</td>
                         </tr>
                     </tbody>
                 </table>
