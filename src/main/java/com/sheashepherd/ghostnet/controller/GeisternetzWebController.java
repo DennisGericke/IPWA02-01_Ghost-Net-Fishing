@@ -70,4 +70,14 @@ public class GeisternetzWebController {
             }
             return "redirect:/liste";
         }
+        @PostMapping("/geborgen/{id}")
+        public String netzGeborgen(@PathVariable Long id) {
+            java.util.Optional<Geisternetz> optionalNetz = geisternetzDatenquelle.findById(id);
+            if (optionalNetz.isPresent()) {
+                Geisternetz netz = optionalNetz.get();
+                netz.setStatus(Status.GEBORGEN);
+                geisternetzDatenquelle.save(netz);
+            }
+            return "redirect:/liste";
+        }
     }
